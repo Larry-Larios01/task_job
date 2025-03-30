@@ -1,0 +1,18 @@
+# Ignorar el entorno virtual
+venv/
+
+# Ignorar cachés de Python
+__pycache__/
+*.py[cod]
+
+# Ignorar caché de pytest
+.pytest_cache/
+
+# Ignorar archivos temporales o específicos del editor
+*.swp
+*.swo
+.idea/
+.vscode/
+
+.env
+prod.env
