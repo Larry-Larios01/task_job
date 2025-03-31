@@ -20,10 +20,18 @@ def delete_duplicated_data():
     leaked_data = data.drop(index=list_data_to_delete)
     return leaked_data
 
+def create_new_column():
+    leaked_data = delete_duplicated_data()
+    leaked_data["<ASK>"] = leaked_data["<ASK>"].fillna(0)
+    leaked_data["<BID>"] = leaked_data["<BID>"].fillna(0)
+    leaked_data["<SPREAD>"] = leaked_data["<ASK>"] - leaked_data["<BID>"]
+    
+    return leaked_data
+
     
 
 
 
 if __name__ == "__main__":
-   data = delete_duplicated_data()
+   data = create_new_column()
    print(data)
