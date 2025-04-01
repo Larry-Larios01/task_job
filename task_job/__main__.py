@@ -35,8 +35,10 @@ def fill_ask_and_bid():
     leaked_data["<ASK>"] = np.where(leaked_data["<ASK>"] == 0, leaked_data["<BID>"] + leaked_data["<SPREAD>"].shift(1), leaked_data["<ASK>"])
     return leaked_data   
 
-
+def save_csv():
+    data = fill_ask_and_bid()
+    data.to_csv("task.csv", index=False)
 
 if __name__ == "__main__":
-   data = fill_ask_and_bid()
-   print(data)
+   data = save_csv()
+   
