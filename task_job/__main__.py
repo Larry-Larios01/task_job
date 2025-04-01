@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def one_million_data():
     csv_file = pd.read_csv("resources/task.csv", sep="\t", nrows=1000000)
@@ -28,10 +29,14 @@ def create_new_column():
     
     return leaked_data
 
-    
+def fill_ask_and_bid():
+    leaked_data = create_new_column()
+    leaked_data["<BID>"] = np.where(leaked_data["<BID>"] == 0, leaked_data["<ASK>"] - leaked_data["<SPREAD>"].shift(1), leaked_data["<BID>"])
+    leaked_data["<ASK>"] = np.where(leaked_data["<ASK>"] == 0, leaked_data["<BID>"] + leaked_data["<SPREAD>"].shift(1), leaked_data["<ASK>"])
+    return leaked_data   
 
 
 
 if __name__ == "__main__":
-   data = create_new_column()
+   data = fill_ask_and_bid()
    print(data)
