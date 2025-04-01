@@ -25,24 +25,38 @@ def add_spread_column(data: pd.DataFrame) -> pd.DataFrame:
 
 def fill_missing_ask_bid(data: pd.DataFrame) -> pd.DataFrame:
 
-    
-    data["<BID>"] = np.where(
+
+    for x in range(10):
+        data["<BID>"] = np.where(
         data["<BID>"].isna(),
         data["<ASK>"] - data["<SPREAD>"].shift(1),
         data["<BID>"]
-    )
-    data["<ASK>"] = np.where(
+        )
+        data["<ASK>"] = np.where(
         data["<ASK>"].isna(),
         data["<BID>"] + data["<SPREAD>"].shift(1),
         data["<ASK>"]
-    )
+        )
 
-    data["<SPREAD>"] = np.where(
+        data["<SPREAD>"] = np.where(
         data["<SPREAD>"].isna(),
         data["<ASK>"] - data["<BID>"],
         data["<SPREAD>"]
-    )
+        )
 
+ 
+        
+         
+
+        
+
+
+        
+
+
+
+
+         
  
 
     
@@ -64,7 +78,7 @@ def main(input_path: str, output_path: str):
     completed_data = fill_missing_ask_bid(with_spread)
     #create_candlestick_plot(completed_data)
     print(completed_data)
-    #save_data(completed_data, output_path)
+    save_data(completed_data, output_path)
 
 if __name__ == "__main__":
-    main("resources/task.csv", "task.csv")
+    main("resources/task.csv", "task2.csv")
